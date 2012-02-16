@@ -1,6 +1,10 @@
 
 public class Level {
-	public Level(int w, int h, int level, Level parentLevel){
-		
+	public int w;
+	public int h;
+	
+	public Level(int w, int h){
+		this.w = w;
+		this.h = h;
 	}
 }
