@@ -1,0 +1,68 @@
+// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 03/01/2012 10:42:32
+// Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   Font.java
+
+
+
+// Referenced classes of package com.mojang.ld22.gfx:
+//            Screen, Color
+
+public class Font
+{
+
+    public Font()
+    {
+    }
+
+    public static void draw(String msg, Screen screen, int x, int y, int col)
+    {
+        msg = msg.toUpperCase();
+        for(int i = 0; i < msg.length(); i++)
+        {
+            int ix = chars.indexOf(msg.charAt(i));
+            if(ix >= 0)
+                screen.render(x + i * 8, y, ix + 960, col, 0);
+        }
+
+    }
+
+    public static void renderFrame(Screen screen, String title, int x0, int y0, int x1, int y1)
+    {
+        for(int y = y0; y <= y1; y++)
+        {
+            for(int x = x0; x <= x1; x++)
+                if(x == x0 && y == y0)
+                    screen.render(x * 8, y * 8, 416, Color.get(-1, 1, 5, 445), 0);
+                else
+                if(x == x1 && y == y0)
+                    screen.render(x * 8, y * 8, 416, Color.get(-1, 1, 5, 445), 1);
+                else
+                if(x == x0 && y == y1)
+                    screen.render(x * 8, y * 8, 416, Color.get(-1, 1, 5, 445), 2);
+                else
+                if(x == x1 && y == y1)
+                    screen.render(x * 8, y * 8, 416, Color.get(-1, 1, 5, 445), 3);
+                else
+                if(y == y0)
+                    screen.render(x * 8, y * 8, 417, Color.get(-1, 1, 5, 445), 0);
+                else
+                if(y == y1)
+                    screen.render(x * 8, y * 8, 417, Color.get(-1, 1, 5, 445), 2);
+                else
+                if(x == x0)
+                    screen.render(x * 8, y * 8, 418, Color.get(-1, 1, 5, 445), 0);
+                else
+                if(x == x1)
+                    screen.render(x * 8, y * 8, 418, Color.get(-1, 1, 5, 445), 1);
+                else
+                    screen.render(x * 8, y * 8, 418, Color.get(5, 5, 5, 5), 1);
+
+        }
+
+        draw(title, screen, x0 * 8 + 8, y0 * 8, Color.get(5, 5, 5, 550));
+    }
+
+    private static String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ      0123456789.,!?'\"-+=/\\%()<>:;     ";
+
+}
