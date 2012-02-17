@@ -48,7 +48,7 @@ public class Level {
 	        for(int y = yo; y <= h + yo; y++)
 	        {
 	            for(int x = xo; x <= w + xo; x++)
-	                Tile.tiles[Background[x+y*w]].render(screen, x*16, y*16);
+	                Tile.tiles[Background[x+y*w]].render(screen, x*16, y*16,false);
 
 	        }
 
@@ -60,5 +60,26 @@ public class Level {
 		for(int i = 0; i< builds.size();i++){
 			builds.get(i).Render(screen);
 		}
+	}
+	
+	public void RenderPossibleBuildings(int xScroll, int yScroll){
+	 	int xo = xScroll >> 4;
+        int yo = yScroll >> 4;
+        int w = screen.w + 15 >> 4;
+        int h = screen.h + 15 >> 4;
+        screen.setOffset(xScroll, yScroll);
+        for(int y = yo; y <= h + yo; y++)
+        {
+            for(int x = xo; x <= w + xo; x++){
+            	if(buildsin[x+y*w]==0){
+            		Tile.tiles[Background[x+y*w]].render(screen, x*16, y*16,true);
+            	}else{
+            		Tile.tiles[Background[x+y*w]].render(screen, x*16, y*16,false);
+            	}
+            }
+
+        }
+        screen.setOffset(0, 0);
+        RenderBuildings();
 	}
 }
