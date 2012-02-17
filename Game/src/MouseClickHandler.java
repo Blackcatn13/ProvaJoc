@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 
 public class MouseClickHandler implements MouseListener{
+	private GameSource game;
 	public ArrayList<button> buttons;
     public button button1;
+    public button House;
     
 	public class button{
 		 public void toggle(boolean pressed)
@@ -56,12 +58,23 @@ public class MouseClickHandler implements MouseListener{
 	public MouseClickHandler(GameSource game){
 		buttons = new ArrayList<button>();
 		button1 = new button();
+		House = new button();
         game.addMouseListener(this);
+        this.game = game;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getButton() == MouseEvent.BUTTON1){
+			if(((e.getX()/3) < 9) && ((e.getX()/3) > 1) && ((e.getY()/3) > 113) && ((e.getY()/3) <= 120)){
+				if(game.House){
+					game.House= false;
+				}else{
+					game.House = true;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -90,7 +103,12 @@ public class MouseClickHandler implements MouseListener{
 	
 	private void toggle(MouseEvent ME, boolean pressed){
 		if(ME.getButton() == MouseEvent.BUTTON1){
-			button1.toggle(pressed);
+			if(ME.getX()/3 < 9 && ME.getX()/3 > 1 && ME.getY()/3 > 113 && ME.getY()/3 < 120){
+				House.toggle(pressed);
+			}
+			else{
+				button1.toggle(pressed);
+			}
 		}
 	}
 
