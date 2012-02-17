@@ -136,8 +136,11 @@ public class GameSource extends Canvas implements Runnable {
 		
 		int xScroll = camera.x - screen.w/2;
 		int yScroll = camera.y - (screen.h-8)/2;
-        
-        level.RenderBackground(xScroll, yScroll);
+        if(House){
+        	level.RenderPossibleBuildings(xScroll, yScroll);
+        }else{
+        	level.RenderBackground(xScroll, yScroll);
+        }
         RenderGui();
         
 		for(int y = 0; y < screen.h; y++)
