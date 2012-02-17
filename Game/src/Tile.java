@@ -3,6 +3,7 @@ public class Tile {
 	public final byte Id;
 	public static Tile tiles[] = new Tile[256];
 	public static Tile grass;
+	public static Tile rock;
 	
 	public Tile(int id){
 		this.Id = (byte)id;
@@ -24,6 +25,7 @@ public class Tile {
 	
 	static{
 		grass = new GrassTile(0);
+		rock = new RockTile(1);
 	}
 	
 }
