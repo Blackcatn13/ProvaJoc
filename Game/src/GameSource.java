@@ -40,6 +40,7 @@ public class GameSource extends Canvas implements Runnable {
 	//private int currentLevel;
 	//private ArrayList<Building> Builds;
 	private Camera camera;
+	public boolean House;
 
 	
 	/**
@@ -71,6 +72,7 @@ public class GameSource extends Canvas implements Runnable {
 		colors = new int[256];
 		tickCount = 0;
 		gameTime = 0;
+		House = false;
 		//Builds = new ArrayList<Building>();
 		//levels = new Level[1];
 		//currentLevel = 1;
@@ -168,12 +170,9 @@ public class GameSource extends Canvas implements Runnable {
 		input2.tick();
 		input.tick();
 		camera.tick();
-		if(input2.button1.down){
-        	//Builds.add(new Building(input1.x,input1.y,this));
-        	//Font.draw("Start game", screen, input1.x, input1.y, Color.get(0,15,50,165));
+		if(input2.button1.down && House){
 			level.AddBuilding(input1.x, input1.y, this);
-			
-        }
+		}
 	}
 	
 	private void init(){
