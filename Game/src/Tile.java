@@ -15,7 +15,7 @@ public class Tile {
 		}
 	}
 	
-	public void render(Screen screen1, int i, int j){
+	public void render(Screen screen1, int i, int j, boolean possible){
 		
 	}
 	
