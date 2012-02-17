@@ -169,7 +169,8 @@ public class GameSource extends Canvas implements Runnable {
 		camera.tick();
 		if(input2.button1.down){
         	//Builds.add(new Building(input1.x,input1.y,this));
-        	//Font.draw("Start game", screen, input1.x, input1.y, Color.get(-1,15,50,165));
+        	//Font.draw("Start game", screen, input1.x, input1.y, Color.get(0,15,50,165));
+			level.AddBuilding(input1.x, input1.y, this);
 			
         }
 	}
@@ -203,7 +204,7 @@ public class GameSource extends Canvas implements Runnable {
         }
         level = new Level(screen);
 		level.InitBackground();
-		camera = new Camera(input);
+		camera = new Camera(input, input1);
 	}
 	public int MouseXPosition(){
 		return input1.x;
