@@ -136,6 +136,7 @@ public class GameSource extends Canvas implements Runnable {
 		int yScroll = camera.y - (screen.h-8)/2;
         
         level.RenderBackground(xScroll, yScroll);
+        RenderGui();
         
 		for(int y = 0; y < screen.h; y++)
         {
@@ -211,5 +212,19 @@ public class GameSource extends Canvas implements Runnable {
 	}
 	public int MouseYPosition(){
 		return input1.y;
+	}
+	
+	public void RenderGui(){
+		for(int y = 1; y < 2; y++){
+			for(int x = 0; x < 20; x++){
+				screen.render(x*8,(screen.h-16)+y*8,384,Color.get(0, 0, 0, 0),0);
+			}
+		}
+		if(input1.x < 9 && input1.x > 1 && input1.y < screen.h && input1.y > screen.h-7){
+			Font.draw("H", screen, 1, screen.h-7, Color.get(-1,155,155,888));
+		}else{
+			Font.draw("H", screen, 1, screen.h-7, Color.get(-1,155,155,155));
+		}
+		
 	}
 }
