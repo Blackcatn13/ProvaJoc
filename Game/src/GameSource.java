@@ -6,9 +6,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -38,10 +35,11 @@ public class GameSource extends Canvas implements Runnable {
 	public int gameTime;
 	private MouseHandler input1;
 	private MouseClickHandler input2;
-	//private Level level;
+	private Level level;
 	//private Level levels[];
 	//private int currentLevel;
-	private ArrayList<Building> Builds;
+	//private ArrayList<Building> Builds;
+	private Camera camera;
 
 	
 	/**
@@ -73,8 +71,7 @@ public class GameSource extends Canvas implements Runnable {
 		colors = new int[256];
 		tickCount = 0;
 		gameTime = 0;
-		Builds = new ArrayList<Building>();
-
+		//Builds = new ArrayList<Building>();
 		//levels = new Level[1];
 		//currentLevel = 1;
 
@@ -135,6 +132,11 @@ public class GameSource extends Canvas implements Runnable {
 			return;
 		}
 		
+		int xScroll = camera.x - screen.w/2;
+		int yScroll = camera.y - (screen.h-8)/2;
+        
+        level.RenderBackground(xScroll, yScroll);
+        
 		for(int y = 0; y < screen.h; y++)
         {
             for(int x = 0; x < screen.w; x++)
@@ -154,9 +156,7 @@ public class GameSource extends Canvas implements Runnable {
         g.drawImage(image, xo, yo, ww, hh, null);
         g.dispose();
         bs.show();
-        for(int i = 0;i<Builds.size();i++){
-		Builds.get(i).Render(screen);
-        }
+
         
         
 	}
@@ -165,9 +165,12 @@ public class GameSource extends Canvas implements Runnable {
 		tickCount++;
 		gameTime++;
 		input2.tick();
+		input.tick();
+		camera.tick();
 		if(input2.button1.down){
-        	Builds.add(new Building(input1.x,input1.y,this));
-        	Font.draw("Start game", screen, input1.x, input1.y, Color.get(-1,15,50,165));
+        	//Builds.add(new Building(input1.x,input1.y,this));
+        	//Font.draw("Start game", screen, input1.x, input1.y, Color.get(-1,15,50,165));
+			
         }
 	}
 	
@@ -198,6 +201,9 @@ public class GameSource extends Canvas implements Runnable {
         catch(IOException e){
         	e.printStackTrace();
         }
+        level = new Level(screen);
+		level.InitBackground();
+		camera = new Camera(input);
 	}
 	public int MouseXPosition(){
 		return input1.x;
