@@ -1,7 +1,9 @@
 
 public class Building {
-	int x,y,x1,y1;
-	GameSource gamehandle;
+	
+	public int x,y,x1,y1;
+	private GameSource gamehandle;	
+	
 	public Building(int X, int Y, GameSource game){
 		x = X;
 		y = Y;
