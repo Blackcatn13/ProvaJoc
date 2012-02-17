@@ -18,7 +18,7 @@ public class Camera {
 		if(input.right.down && x < 160) x++;
 		if(input1.x > 155 && x < 160) x++;
 		if(input1.x < 5 && x > 80) x--;
-		if(input1.y > 115 && y < 120) y++;
+		if(input1.y > 100 && y < 120) y++;
 		if(input1.y < 5 && y > 56) y--;
 		
 	}
