@@ -5,6 +5,7 @@ public class Level {
 	public int w;
 	public int h;
 	private ArrayList <Building> builds;
+	private byte[] buildsin;
 	private byte[] Background;
 	private Screen screen;
 	
@@ -13,25 +14,29 @@ public class Level {
 		this.h = screen.h/8;
 		this.screen = screen;
 		Background = new byte[this.w*this.h];
+		builds = new ArrayList<Building>();
+		buildsin = new byte[this.w*this.h];
+		for(int i = 0;i<buildsin.length;i++){
+			buildsin[i] = 0;
+		}
 	}
 	
 	public void AddBuilding(int x, int y, GameSource game){
-		builds.add(new Building(x,y,game));
+		if(!AnyBuildingInZone(x,y)){
+			builds.add(new Building(x,y,game));
+		}
 	}
 	
+	private boolean AnyBuildingInZone(int x, int y) {
+		boolean Any;
+		Any = false;
+		return Any;
+	}
+
 	public void InitBackground(){
 		for(int i = 0; i < w*h;i++){
 				Background[i]=Tile.grass.Id;
 		}
-		Background[53] = Tile.rock.Id;
-		Background[100] = Tile.rock.Id;
-		Background[255] = Tile.rock.Id;
-		Background[299] = Tile.rock.Id;
-		Background[200] = Tile.rock.Id;
-		Background[180] = Tile.rock.Id;
-		Background[150] = Tile.rock.Id;
-		Background[0] = Tile.rock.Id;
-		
 	}
 	
 	public void RenderBackground(int xScroll, int yScroll){
@@ -48,8 +53,12 @@ public class Level {
 	        }
 
 	        screen.setOffset(0, 0);
-		/*for(int i = 0; i < Background.length;i++){
-			Tile.tiles[Background[i]].render(screen,(i%10)*16 ,(i/10)*16);
-		}*/
+	        RenderBuildings();
+	}
+	
+	public void RenderBuildings(){
+		for(int i = 0; i< builds.size();i++){
+			builds.get(i).Render(screen);
+		}
 	}
 }
