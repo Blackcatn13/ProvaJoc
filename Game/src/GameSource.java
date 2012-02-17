@@ -167,6 +167,7 @@ public class GameSource extends Canvas implements Runnable {
 		input2.tick();
 		if(input2.button1.down){
         	Builds.add(new Building(input1.x,input1.y,this));
+        	Font.draw("Start game", screen, input1.x, input1.y, Color.get(-1,15,50,165));
         }
 	}
 	
