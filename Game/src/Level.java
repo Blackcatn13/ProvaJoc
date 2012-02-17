@@ -4,7 +4,7 @@ public class Level {
 	public int h;
 	
 	public Level(int w, int h){
-		this.w = w;
-		this.h = h;
+		this.w = w/8;
+		this.h = h/8;
 	}
 }
