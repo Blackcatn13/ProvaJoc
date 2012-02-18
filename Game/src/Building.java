@@ -12,7 +12,7 @@ public class Building {
 		gamehandle = game;
 	}
 	
-	public void Render(Screen screen){
+	public void Render(Screen screen, int x ,int y){
 		int col = Color.get(-1,111,510,537);
 		int col1 = Color.get(-1,333, 730, 759);
 		int xt,yt;
