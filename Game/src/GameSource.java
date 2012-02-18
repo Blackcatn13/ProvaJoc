@@ -72,7 +72,7 @@ public class GameSource extends Canvas implements Runnable {
 		colors = new int[256];
 		tickCount = 0;
 		gameTime = 0;
-		House = false;
+		House = true;
 		//Builds = new ArrayList<Building>();
 		//levels = new Level[1];
 		//currentLevel = 1;
@@ -205,10 +205,10 @@ public class GameSource extends Canvas implements Runnable {
         catch(IOException e){
         	e.printStackTrace();
         }
-        level = new Level(screen);
+        camera = new Camera(input, input1);
+        level = new Level(screen, camera);
 		level.InitBackground();
-		camera = new Camera(input, input1);
-	}
+			}
 	public int MouseXPosition(){
 		return input1.x;
 	}
