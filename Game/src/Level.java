@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 
 
@@ -10,6 +12,7 @@ public class Level {
 	private Screen screen;
 	private Camera cam;
 	private Building[] Build;
+	private ArrayList<Soldier> solds;
 	
 	public Level(Screen screen, Camera camera){
 		this.w = screen.w/8;
@@ -19,6 +22,7 @@ public class Level {
 		builds = new ArrayList<Building>();
 		buildsin = new byte[this.w*this.h];
 		Build = new Building[this.w*this.h];
+		solds = new ArrayList<Soldier>();
 		cam = camera;
 	}
 	
@@ -27,12 +31,8 @@ public class Level {
 		int yo = y/16;
 		int Difx = (cam.x - screen.w/2);
 		int Dify = cam.y - (screen.h-8)/2;
-		int Sum = Difx/16;
-		int Mul = Dify/16;
-		/*int Difx1 = Difx%16;
-		if(!(x-(16-Difx1) < 0)){
-			Sum++;
-		}*/
+		int Sum = (Difx)/16;
+		int Mul = (Dify)/16;
 		if(!AnyBuildingInZone(x,y)){
 			Build[xo+(yo+Mul)*this.w+Sum]= new Building(x,y,game);
 			buildsin[xo+(yo+Mul)*this.w+Sum] = 1;
@@ -66,8 +66,8 @@ public class Level {
 	            	}
 	            }
 	        }
-
 	        screen.setOffset(0, 0);
+	        renderSoldiers();
 	}
 	
 	public void RenderBuildings(){
@@ -95,5 +95,27 @@ public class Level {
 
         }
         screen.setOffset(0, 0);
+	}
+	
+	public void addSoldier(Soldier sol) {
+		solds.add(sol);
+	}
+	
+	private void renderSoldiers() {
+		for (int i = 0; i< solds.size(); i++) {
+			solds.get(i).render(screen);
+		}
+	}
+	
+	public void tick() {
+		for (int i = 0; i < Build.length; i++) {
+			if(buildsin[i] == 1) {
+				Build[i].tick();
+			}
+		}
+		for (int i = 0; i < solds.size(); i++) {
+			solds.get(i).tick();
+		}
+		
 	}
 }
