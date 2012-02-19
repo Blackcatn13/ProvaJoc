@@ -173,6 +173,7 @@ public class GameSource extends Canvas implements Runnable {
 		input2.tick();
 		input.tick();
 		camera.tick();
+		level.tick();
 		if(input2.button1.down && House){
 			level.AddBuilding(input1.x, input1.y, this);
 		}
@@ -228,5 +229,9 @@ public class GameSource extends Canvas implements Runnable {
 			Font.draw("H", screen, 1, screen.h-7, Color.get(-1,155,155,155));
 		}
 		
+	}
+	
+	public Level getLevel() {
+		return level;
 	}
 }
