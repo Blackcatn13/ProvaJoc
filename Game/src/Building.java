@@ -1,8 +1,10 @@
 
+
 public class Building {
 	
-	public int x,y,x1,y1;
+	public int x,y,x1,y1,timeout,time;
 	private GameSource gamehandle;	
+	private boolean soldier;
 	
 	public Building(int X, int Y, GameSource game){
 		x = X;
@@ -10,6 +12,9 @@ public class Building {
 		x1 = X+16;
 		y1 = Y+16;
 		gamehandle = game;
+		timeout = 60;
+		time = 0;
+		soldier = false;
 	}
 	
 	public void Render(Screen screen, int x ,int y){
@@ -31,7 +36,12 @@ public class Building {
 		}
 	}
 	
-	public void Tick(){
-		
+	public void tick(){
+		time++;
+		if(time == timeout && !soldier) {
+			time = 0;
+			gamehandle.getLevel().addSoldier(new Soldier(x+16,y,50));
+			soldier = true;
+		}
 	}
 }
